@@ -1,0 +1,6 @@
+<h1> Bienvenido!</h1>
+<h2 th:if="${session.usuariosession != null}" th:text="${session.usuariosession.nombre + ' ' + session.usuariosession.apellido}"></h2>
+<br>
+<div th:if="${session.usuariosession.foto !=null}">
+            <img class="shadow rounded-circle" th:src="@{|/foto/usuario/${session.usuariosession.id}|}" id="fotoPerfil">
+</div>

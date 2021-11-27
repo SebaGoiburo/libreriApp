@@ -1,0 +1,14 @@
+<div class="tabla" id="tablaAutores">
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+          </tr>
+        </thead>
+        <tbody th:each="autor : ${autores}">
+          <tr>
+            <td th:text="${autor.nombre}"></td>
+          </tr>
+        </tbody>
+      </table>
+</div>

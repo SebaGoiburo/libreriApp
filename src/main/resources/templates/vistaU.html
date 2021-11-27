@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styleU.css">
+    <title>Registrate</title>
+</head>
+<body>
+    <div class="container">  
+        <div class="header">
+            <img src="Imag\Estante.png" height=75px width=130px alt="icono libreria">
+            <ul class="menuSup">
+                <li th:if="${session.usuariosession == null}"><a href="#">Registro</a></li>
+                <li th:if="${session.usuariosession == null}"><a href="#">Login</a></li>
+                <li th:if="${session.usuariosession != null}"><a href="#">Perfil</a></li>
+                <li th:if="${session.usuariosession != null}"><a href="#">Salir</a></li>
+            </ul>
+        </div>
+        <div class="centro">
+            <div class="left">
+              <ul class="menuLat">
+                <li><a href="#">Libros</a></li>
+                <li><a href="#">Autores</a></li>
+                <li><a href="#">Editoriales</a></li>
+                <li th:if="${session.usuariosession != null}"><a href="#">Préstamos</a></li>
+            </ul>
+            </div>
+            <div class="right">
+                <div th:if="@{/inicio}">
+                    <h1> Bienvenido!</h1>
+                    <h2 th:if="${session.usuariosession != null}" th:text="${session.usuariosession.nombre + ' ' + session.usuariosession.apellido}"></h2>
+                    <br>
+                    <div th:if="${session.usuariosession.foto !=null}">
+                    <img class="shadow rounded-circle" th:src="@{|/foto/usuario/${session.usuariosession.id}|}" id="fotoPerfil">
+                </div>
+                <div th:if="@{/libros}">
+                    <td th:if="${session.usuariosession.rol == 'ADMIN'}"> <a class="btn btn-primary" th:href="@{/cargarLibro}">Cargar libro</a></td>
+                    <div class="tabla" id="tablaLibros">
+                        <table class="table table-striped" id="tabla">
+                            <thead>
+                              <tr>
+                                <th scope="col">Titulo</th>
+                                <th scope="col">Autor</th>
+                                <th scope="col">Editorial</th>
+                                <th scope="col">ISBN</th>
+                                <th scope="col">Ejemplares</th>
+                                <th scope="col">Disponibles</th>
+                              </tr>
+                            </thead>
+                            <tbody th:each="libro : ${libros}">
+                              <tr>
+                                <td th:text="${libro.titulo}"></td>
+                                <td th:text="${libro.autor.nombre}"></td>
+                                <td th:text="${libro.editorial.nombre}"></td>
+                                <td th:text="${libro.isbn}"></td>
+                                <td th:text="${libro.ejemplares}"></td>
+                                <td th:text="${libro.ejemplaresRestantes}"></td>
+                                <td th:if="${session.usuariosession.rol == 'ADMIN'}"> <a class="btn btn-primary" th:href="@{/modificarLibro/__${libro.id}__}">Editar</a></td>
+                                <td th:if="${session.usuariosession.rol == 'ADMIN'}"> <a class="btn btn-primary" th:href="">Baja</a></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                    </div>
+                    <div th:if="@{/autores}">
+                        <td th:if="${session.usuariosession.rol == 'ADMIN'}"> <a class="btn btn-primary" th:href="@{/cargarAutor}">Cargar autor</a></td>
+                        <div class="tabla" id="tablaAutores">
+                            <table class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Nombre</th>
+                                  </tr>
+                                </thead>
+                                <tbody th:each="autor : ${autores}">
+                                  <tr>
+                                    <td th:text="${autor.nombre}"></td>
+                                    <td> <a class="btn btn-primary" th:href="#">Consultar libros</a></td>
+                                    <td th:if="${session.usuariosession.rol == 'ADMIN'}"> <a class="btn btn-primary" th:href="@{/modificar/__${autor.id}__}">Editar</a></td>
+                                    <td th:if="${session.usuariosession.rol == 'ADMIN'}"> <a class="btn btn-primary" th:href="@{/__${autor.id}__}">Baja</a></td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                        </div>
+                    </div>
+                    <div th:if="@{/editoriales}">
+                        <td th:if="${session.usuariosession.rol == 'ADMIN'}"> <a class="btn btn-primary" th:href="@{/cargarEditorial}">Cargar editorial</a></td>
+                        <div class="tabla" id="tablaEditoriales">
+                            <table class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Nombre</th>
+                                  </tr>
+                                </thead>
+                                <tbody th:each="editorial : ${editoriales}">
+                                  <tr>
+                                    <td th:text="${editorial.nombre}"></td>
+                                    <td> <a class="btn btn-primary" th:href="#">Consultar libros</a></td>
+                                    <td th:if="${session.usuariosession.rol == 'ADMIN'}"> <a class="btn btn-primary" th:href="@{/__${editorial.id}__}">Editar</a></td>
+                                    <td th:if="${session.usuariosession.rol == 'ADMIN'}"> <a class="btn btn-primary" th:href="@{/__${editorial.id}__}">Baja</a></td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                        </div>
+                    </div>
+                    <div th:if="@{/libros/cargarLibro}">
+                        <form th:action="@{cargarLibro/cargar}" method="POST">
+            
+                        <p th:if="${error != null}" th:text="${error}" style="color: red"></p> 
+            
+                        <input type="text" name="titulo" placeholder="Título" th:value="${titulo}"> <br>
+                        <select name="id_autor">
+                            <option  th:each="autor : ${autores}" th:value="${autor.id}" th:text="${autor.nombre}"></option>
+                        </select><br>
+                        <select name="id_editorial">
+                        <option  th:each="editorial : ${editoriales}" th:value="${editorial.id}" th:text="${editorial.nombre}"></option>
+                        </select> <br>
+                        <input type="number" name="ejemplares" placeholder="Cantidad de ejemplares" th:value="${ejemplares}"> <br>
+                        <input type="text" name="isbn" placeholder="ISBN" th:value="${isbn}"> <br>
+                        <button type="submit">Cargar</button> <button type="reset">Borrar formulario</button> <br>
+                        </form>
+                    </div>
+                    <div th:if="@{/modificarLibro/{id}">
+                        <form th:action="@{/modificarLibro/modificar}" method="POST">
+            
+                        <p th:if="${error != null}" th:text="${error}" style="color: red"></p> 
+
+                        <div th:if="${error == null}" class="card border-success mb-3" style="max-width: 18rem;">
+                            <div class="card-header">Así se hace!</div>
+                            <div class="card-body text-success">
+                            <h5 class="card-title">Operación exitosa</h5>
+                            <p class="card-text">El autor tiene nuevo nombre</p>
+                            </div>
+                        </div> 
+                        <input hidden th:value="${libro.id}" name="id">
+                        <input type="text" name="titulo" th:value="${libro.titulo}"> <br>
+                        <select name="id_autor">
+                            <option  th:each="autor : ${autores}" th:value="${autor.id}" th:text="${autor.nombre}"></option>
+                        </select><br>
+                        <select name="id_editorial">
+                            <option  th:each="editorial : ${editoriales}" th:value="${editorial.id}" th:text="${editorial.nombre}"></option>
+                        </select> <br>
+                        <input type="number" name="ejemplares" th:value="${libro.ejemplares}"> <br>
+                        <input type="text" name="isbn" th:value="${libro.isbn}"> <br>
+                        <button type="submit">Cargar</button> <button type="reset">Borrar formulario</button> <br>
+                        </form>
+                    </div>
+                    <div th:if="@{/modificarAutor/{id}">
+                        <form th:action="@{/modificarAutor/modificar}" method="POST">
+                        <input hidden th:value="${autor.id}" name="id">
+                        <input type="text" name="nombre" placeholder="Nombre" th:value="${autor.nombre}"> <br>
+                        <button type="submit">Cargar</button> <button type="reset">Borrar formulario</button> <br>
+                        </form>
+                    </div>
+                    <div th:if="@{cargarAutor">
+                        <form th:action="@{cargarAutor/cargar}" method="POST">
+            
+                        <p th:if="${error != null}" th:text="${error}" style="color: red"></p> 
+
+                        <input type="text" name="nombre" placeholder="Nombre" th:value="${nombre}"> <br>
+                        <button type="submit">Cargar</button> <button type="reset">Borrar formulario</button> <br>
+                        </form>
+                    </div>
+                    <div th:if="@{cargarEditorial">
+                        <form th:action="@{cargarEditorial/cargar}" method="POST">
+            
+                        <p th:if="${error != null}" th:text="${error}" style="color: red"></p> 
+
+                        <input type="text" name="nombre" placeholder="Nombre" th:value="${nombre}"> <br>
+                        <button type="submit">Cargar</button> <button type="reset">Borrar formulario</button> <br>
+                        </form>
+                    </div>
+                    <form th:action="@{/modificarEditorial/modificar}" method="POST">
+           
+                    <input hidden th:value="${editorial.id}" name="id">
+                    <input type="text" name="nombre" placeholder="Nombre" th:value="${editorial.nombre}"> <br>
+                    <button type="submit">Cargar</button> <button type="reset">Borrar formulario</button> <br>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <p>Contacto: 0263-252896</p>
+        </footer>
+    </div>      
+</body>
+</html>
