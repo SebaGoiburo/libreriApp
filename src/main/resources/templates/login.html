@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,18 +15,22 @@
         <div class="header">
             <img src="Imag\Estante.png" height=75px width=130px alt="icono libreria">
             <ul class="menuSup">
-                <li><a href="#">Registro</a></li>
-                <li><a href="#">Login</a></li>
+                <li><a href="/registro">Registro</a></li>
+                
             </ul>
         </div>
         <div class="centro">
             <h1 id="login">Login</h1>
             <div class="formulario">
-                <form action="#">
+                <form action="/logincheck" method="POST">
+                <p th:if="${error!=null}" th:text="${error}" style= color:red ></p>
+                <p th:if="${logout!=null}" th:text="${logout}" style= color:green ></p>
                     <label for="correr">Correo electrónico</label>
                     <input type="text" name="correo">
                     <label for="pasw">Contraseña</label>
                     <input type="password">
+                    <br>
+                    <button type="submit">Entrar</button>
                 </form>
             </div>
         </div>

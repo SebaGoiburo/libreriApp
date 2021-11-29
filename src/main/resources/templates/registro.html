@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,17 +15,19 @@
         <div class="header">
             <img src="Imag\Estante.png" height=75px width=130px alt="icono libreria">
             <ul class="menuSup">
-                <li><a href="#">Registro</a></li>
-                <li><a href="#">Login</a></li>
+                
+                <li><a href="/login">Login</a></li>
             </ul>
         </div>
         <div class="centro">
             <h1 id="registrate">Registrate</h1>
-            <form action="#">
+            <form action="/registrar" method="POST" enctype="multipart/form-data">
                 <label for="name">Nombre</label>
                 <input type="text" name="name">
                 <label for="apellido">Apellido</label>
                 <input type="text" name="apellido">
+                <label for="foto">Cargá tu foto...</label><br>
+                <input type="file" name="foto"><br>
                 <label for="correo">Correo electrónico</label>
                 <input type="text" name="correo">
                 <label for="clave">Contraseña</label>
