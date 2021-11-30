@@ -53,7 +53,7 @@ public class PortalControlador {
 //        u = usuarioservicio.getOne(user.getUsername());
 //        modelo.put("nombre", u.getNombre());
 //        modelo.put("apellido", u.getApellido());
-    return "inicio.html";
+    return "vistaU.html";
     }
     
     @GetMapping("/login")

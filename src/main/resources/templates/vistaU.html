@@ -39,7 +39,9 @@
                     <img class="shadow rounded-circle" th:src="@{|/foto/usuario/${session.usuariosession.id}|}" id="fotoPerfil">
                 </div>
                 <div th:if="@{/libros}">
-                    <td th:if="${session.usuariosession.rol == 'ADMIN'}"> <a class="btn btn-primary" th:href="@{/cargarLibro}">Cargar libro</a></td>
+                    <div th:if="${session.usuariosession.rol == 'ADMIN'}">
+                        <a class="btn btn-primary" th:href="@{/cargarLibro}">Cargar libro</a></td>
+                    </div>
                     <div class="tabla" id="tablaLibros">
                         <table class="table table-striped" id="tabla">
                             <thead>
@@ -123,7 +125,7 @@
                         <button type="submit">Cargar</button> <button type="reset">Borrar formulario</button> <br>
                         </form>
                     </div>
-                    <div th:if="@{/modificarLibro/{id}">
+                    <!-- <div th:if="@{/modificarLibro/{id}">
                         <form th:action="@{/modificarLibro/modificar}" method="POST">
             
                         <p th:if="${error != null}" th:text="${error}" style="color: red"></p> 
@@ -147,15 +149,15 @@
                         <input type="text" name="isbn" th:value="${libro.isbn}"> <br>
                         <button type="submit">Cargar</button> <button type="reset">Borrar formulario</button> <br>
                         </form>
-                    </div>
-                    <div th:if="@{/modificarAutor/{id}">
+                    </div> -->
+                    <!-- <div th:if="@{/modificarAutor/{id}">
                         <form th:action="@{/modificarAutor/modificar}" method="POST">
                         <input hidden th:value="${autor.id}" name="id">
                         <input type="text" name="nombre" placeholder="Nombre" th:value="${autor.nombre}"> <br>
                         <button type="submit">Cargar</button> <button type="reset">Borrar formulario</button> <br>
                         </form>
-                    </div>
-                    <div th:if="@{cargarAutor">
+                    </div> -->
+                    <div th:if="@{/cargarAutor}">
                         <form th:action="@{cargarAutor/cargar}" method="POST">
             
                         <p th:if="${error != null}" th:text="${error}" style="color: red"></p> 
@@ -164,7 +166,7 @@
                         <button type="submit">Cargar</button> <button type="reset">Borrar formulario</button> <br>
                         </form>
                     </div>
-                    <div th:if="@{cargarEditorial">
+                    <div th:if="@{/cargarEditorial}">
                         <form th:action="@{cargarEditorial/cargar}" method="POST">
             
                         <p th:if="${error != null}" th:text="${error}" style="color: red"></p> 
@@ -173,12 +175,15 @@
                         <button type="submit">Cargar</button> <button type="reset">Borrar formulario</button> <br>
                         </form>
                     </div>
-                    <form th:action="@{/modificarEditorial/modificar}" method="POST">
+                    <!--<div>
+                       <form th:action="@{/modificarEditorial/modificar}" method="POST">
            
                     <input hidden th:value="${editorial.id}" name="id">
                     <input type="text" name="nombre" placeholder="Nombre" th:value="${editorial.nombre}"> <br>
                     <button type="submit">Cargar</button> <button type="reset">Borrar formulario</button> <br>
-                    </form>
+                    </form> 
+                    </div>-->
+                    
                 </div>
             </div>
         </div>
