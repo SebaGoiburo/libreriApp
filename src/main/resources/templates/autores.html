@@ -19,7 +19,7 @@
                 <li th:if="${session.usuariosession == null}"><a href="#">Registro</a></li>
                 <li th:if="${session.usuariosession == null}"><a href="#">Login</a></li>
                 <li th:if="${session.usuariosession != null}"><img class="shadow rounded-circle" th:src="@{|/foto/usuario/${session.usuariosession.id}|}" id="fotito"> </li>
-                <li th:if="${session.usuariosession != null}"><a href="#">Perfil</a></li>
+                <li th:if="${session.usuariosession != null}"><a th:href="@{/perfil}">Perfil</a></li>
                 <li th:if="${session.usuariosession != null}"><a href="/logout">Salir</a></li>
             </ul>
         </div>
@@ -34,7 +34,7 @@
             </div>
             <div class="right">
                         <div id="botonCargaLibro" th:if="${session.usuariosession.rol == 'ADMIN'}">
-                        <a class="btn btn-secondary btn-lg opacity-75" th:href="@{/cargarAutor}">Cargar autor</a></td>
+                        <a class="btn btn-outline-light" th:href="@{/cargarAutor}">Cargar autor</a></td>
                         </div>
                         <br>
                         <br>
@@ -49,9 +49,9 @@
                                 <tbody th:each="autor : ${autores}">
                                   <tr>
                                     <td th:text="${autor.nombre}"></td>
-                                    <td> <a class="btn btn-primary" href="">Consultar libros</a></td>
-                                    <!--<td th:if="${session.usuariosession.rol == 'ADMIN'}"> <a class="btn btn-primary" th:href="@{/modificar/__${autor.id}__}">Editar</a></td>
-                                    <td th:if="${session.usuariosession.rol == 'ADMIN'}"> <a class="btn btn-primary" th:href="@{/__${autor.id}__}">Baja</a></td>-->
+                                    <td> <a class="btn btn-outline-light" href="">Consultar libros</a></td>
+                                    <td th:if="${session.usuariosession.rol == 'ADMIN'}"> <a class="btn btn-outline-light" th:href="@{/__${autor.id}__}">Editar</a></td>
+                                    <td th:if="${session.usuariosession.rol == 'ADMIN'}"> <a class="btn btn-outline-light" th:href="@{/__${autor.id}__}">Baja</a></td>
                                   </tr>
                                 </tbody>
                               </table>

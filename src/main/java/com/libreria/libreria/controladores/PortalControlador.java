@@ -116,6 +116,7 @@ public class PortalControlador {
     @PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
     @GetMapping("/perfil")
     public String perfil(){
+        
     return "perfil.html";
     }
     

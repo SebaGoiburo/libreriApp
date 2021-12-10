@@ -41,8 +41,8 @@ public class LibroControlador {
         List<Autor> autores = autorservicio.listarAutores();
         List<Editorial> editoriales = editorialservicio.listarEditoriales();
         modelo.addAttribute("autores", autores);
-         modelo.addAttribute("editoriales", editoriales);
-        return "vistaU.html";
+        modelo.addAttribute("editoriales", editoriales);
+        return "cargarLibro.html";
     }
     
     @PostMapping("cargarLibro/cargar")
@@ -57,9 +57,11 @@ public class LibroControlador {
             modelo.put("ejemplares", ejemplares);
             modelo.put("isbn", isbn);
             Logger.getLogger(PortalControlador.class.getName()).log(Level.SEVERE,null, e);
-            return "index.html";
-        }   
-        return "redirect:/libros";
+            return "cargarLibro.html";
+        }
+            String exito = "Carga de libro exitosa"; 
+            modelo.put("exito", exito);
+        return "cargarLibro.html";
     }
     
     
