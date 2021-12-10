@@ -34,8 +34,9 @@ body{
 .menuSup{
     height: 100%;
     float: right;
-    margin-right: 30px;
-    vertical-align: auto;
+    margin-right: 40px;
+    display: flex;
+    align-items: center;
 
 }
 .menuSup li{
@@ -44,20 +45,29 @@ body{
     font-family: Roboto, sans-serif;
     color: rgb(255, 255, 255);
     display: inline;
+    margin: auto;
+    padding-left: 20px;
+    padding-right: 20px;
     gap: 20px;
-    padding: 20px;
-    vertical-align: auto;
+    vertical-align: middle;
 }
 .menuSup a{
     color: rgb(255, 255, 255);
     text-decoration: none;
     padding: auto;
     text-align: center;
-    vertical-align: auto;
+    vertical-align: middle;
     margin-bottom: 10px;
 }
 .menuSup a:hover{
     font-style: italic;
+}
+
+#fotito{
+    width: 45px;
+    height: 45px;
+    border-radius: 22.5px;
+    border: solid 2px white;
 }
 
 .centro{
@@ -109,12 +119,27 @@ body{
 
 .right{
     width: 100%;
-    overflow: hidden;
+    height: 525px;
+    overflow-y: auto;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
+.right::-webkit-scrollbar {
+  width: 12px;               
+}
+
+.right::-webkit-scrollbar-track {
+  background: black;         
+}
+
+.right::-webkit-scrollbar-thumb {
+  background-color: grey;     
+  border-radius: 20px;        
+  border: 3px solid black;  
+}
 
 footer{
     width: 100%;
@@ -184,6 +209,27 @@ form{
 }
 
 .tabla{
-    font-family: Roboto, sans-serif;
-     
+    width: 850px;
+    height: 500px;
+    overflow-y: auto;
+}
+
+.tabla::-webkit-scrollbar {
+  width: 12px;               
+}
+
+.tabla::-webkit-scrollbar-track {
+  background: black;         
+}
+
+.tabla::-webkit-scrollbar-thumb {
+  background-color: grey;     
+  border-radius: 20px;        
+  border: 3px solid black;  
+}
+
+#botonCargaLibro{
+    margin-left: auto;
+    margin-top: 20px;
+    margin-right: 40px;
 }

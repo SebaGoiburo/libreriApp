@@ -18,7 +18,8 @@
             <ul class="menuSup">
                 <li th:if="${session.usuariosession == null}"><a href="#">Registro</a></li>
                 <li th:if="${session.usuariosession == null}"><a href="#">Login</a></li>
-                <li th:if="${session.usuariosession != null}"><a href="#">Perfil</a></li>
+                <li th:if="${session.usuariosession != null}"><img class="shadow rounded-circle" th:src="@{|/foto/usuario/${session.usuariosession.id}|}" id="fotito"> </li>
+                <li th:if="${session.usuariosession != null}"><a th:href="@{/perfil}">Perfil</a></li>
                 <li th:if="${session.usuariosession != null}"><a href="/logout">Salir</a></li>
             </ul>
         </div>
@@ -37,8 +38,14 @@
                     <div id="contenedorImag" th:if="${session.usuariosession.foto !=null}">
                     <img class="shadow rounded-circle" th:src="@{|/foto/usuario/${session.usuariosession.id}|}" id="fotoPerfil">
                     </div>
-                    <h2 th:if="${session.usuariosession != null}" th:text="${session.usuariosession.nombre + ' ' + session.usuariosession.apellido}"></h2>
+                    <h2  th:text="${session.usuariosession.nombre + ' ' + session.usuariosession.apellido}"></h2>
                     <br>
+                    <div th:if="${session.usuariosession != null}" class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+                        <div class="card-header" th:text="${session.usuariosession.nombre + ' ' + session.usuariosession.apellido}"></div>
+                        <div class="card-body">
+                        <h5 class="card-title">Datos personales</h5>
+                        <p class="card-text" th:text="${session.usuariosession.correo + <br> + session.usuariosession.rol}" ></p>
+                        </div>
                 </div>
             </div>
         </div>

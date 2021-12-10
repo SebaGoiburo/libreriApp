@@ -82,26 +82,7 @@
                               </table>
                         </div>
                     </div>
-                    <div th:if="${editorial != null}">
-                        <td th:if="${session.usuariosession.rol == 'ADMIN'}"> <a class="btn btn-primary" th:href="@{/cargarEditorial}">Cargar editorial</a></td>
-                        <div class="tabla" id="tablaEditoriales">
-                            <table class="table table-striped">
-                                <thead>
-                                  <tr>
-                                    <th scope="col">Nombre</th>
-                                  </tr>
-                                </thead>
-                                <tbody th:each="editorial : ${editoriales}">
-                                  <tr>
-                                    <td th:text="${editorial.nombre}"></td>
-                                    <td> <a class="btn btn-primary" th:href="#">Consultar libros</a></td>
-                                    <td th:if="${session.usuariosession.rol == 'ADMIN'}"> <a class="btn btn-primary" th:href="@{/__${editorial.id}__}">Editar</a></td>
-                                    <td th:if="${session.usuariosession.rol == 'ADMIN'}"> <a class="btn btn-primary" th:href="@{/__${editorial.id}__}">Baja</a></td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                        </div>
-                    </div>
+                    
                     <div th:if="${cargarLibro != null}">
                         <form th:action="@{cargarLibro/cargar}" method="POST">
             

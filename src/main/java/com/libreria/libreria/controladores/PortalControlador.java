@@ -92,32 +92,32 @@ public class PortalControlador {
     @PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
     @GetMapping("/libros")
     public String libros(ModelMap modelo){
-        modelo.addAttribute("libro", " ");
         List<Libro> libros = libroservicio.listaLibros();
         modelo.addAttribute("libros", libros);
-    return "vistaDinamica.html";
+    return "libros.html";
     }
     
     @PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
     @GetMapping("/editoriales")
     public String editoriales(ModelMap modelo){
-        modelo.addAttribute("editorial", " " );
         List<Editorial> editoriales = editorialservicio.listarEditoriales();
         modelo.addAttribute("editoriales", editoriales);
-    return "vistaDinamica.html";
+    return "editoriales.html";
     }
     
     @PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
     @GetMapping("/autores")
     public String autores(ModelMap modelo){
-        modelo.addAttribute("autor", " ");
         List<Autor> autores = autorservicio.listarAutores();
         modelo.addAttribute("autores", autores);
-    return "vistaDinamica.html";
+    return "autores.html";
     }
     
-    
-    
+    @PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
+    @GetMapping("/perfil")
+    public String perfil(){
+    return "perfil.html";
+    }
     
     
 }
