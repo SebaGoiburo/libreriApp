@@ -37,6 +37,7 @@
                     <div id="botonCargaLibro" th:if="${session.usuariosession.rol == 'ADMIN'}">
                         <a class="btn btn-outline-light" th:href="@{libros/cargarLibro}">Cargar libro</a></td>
                     </div>
+                    <p th:if="${exito != null}" th:text="${exito}" style="color: greenyellow"></p> 
                     <br>
                     <br>
                     <div class="tabla" id="tablaLibros">

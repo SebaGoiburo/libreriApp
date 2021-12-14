@@ -110,6 +110,7 @@ public class PortalControlador {
     public String autores(ModelMap modelo){
         List<Autor> autores = autorservicio.listarAutores();
         modelo.addAttribute("autores", autores);
+        
     return "autores.html";
     }
     

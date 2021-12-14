@@ -5,7 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 public class Libro {
@@ -14,12 +16,19 @@ public class Libro {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name= "uuid", strategy= "uuid2")
     private String id;
+    
     private String isbn;
+    
     private String titulo;
+    
     private Integer ejemplares;
+    
     private Integer ejemplaresPrestados;
+    
     private Integer ejemplaresRestantes;
+    
     private boolean alta;
+    
     private boolean baja;
     
     @ManyToOne
@@ -28,6 +37,19 @@ public class Libro {
     @ManyToOne
     private Editorial editorial;
 
+    @OneToOne
+    private FotoLibro foto;
+
+    public FotoLibro getFoto() {
+        return foto;
+    }
+
+    public void setFoto(FotoLibro foto) {
+        this.foto = foto;
+    }
+    
+    
+    
     public String getId() {
         return id;
     }
@@ -106,6 +128,10 @@ public class Libro {
 
     public void setEditorial(Editorial editorial) {
         this.editorial = editorial;
+    }
+
+    public void setFoto(MultipartFile foto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

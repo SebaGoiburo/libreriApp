@@ -1,25 +1,28 @@
 
 package com.libreria.libreria.entidades;
 
-import javax.persistence.Column;
+import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-public class Autor {
+public class FotoLibro {
     
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name= "uuid", strategy= "uuid2")
     private String id;
-    
-    @Column(unique = true, nullable = false)
+
     private String nombre;
     
-    @Column
-    private boolean alta;
+    private String mime;
+    
+    @Lob @Basic(fetch = FetchType.LAZY)
+    private byte[] contenido;
 
     public String getId() {
         return id;
@@ -37,11 +40,21 @@ public class Autor {
         this.nombre = nombre;
     }
 
-    public boolean isAlta() {
-        return alta;
+    public String getMime() {
+        return mime;
     }
 
-    public void setAlta(boolean alta) {
-        this.alta = alta;
+    public void setMime(String mime) {
+        this.mime = mime;
     }
+
+    public byte[] getContenido() {
+        return contenido;
+    }
+
+    public void setContenido(byte[] contenido) {
+        this.contenido = contenido;
+    }
+ 
+    
 }

@@ -32,31 +32,18 @@
                 <li th:if="${session.usuariosession != null}"><a href="#">Préstamos</a></li>
             </ul>
             </div>
-            <div class="right">
-                
+            <div class="right"> 
                 <div class="formularioCarga bg-dark mb-3 opacity-75">
-                    <h2>Cargue su libro</h2>
-                    <form th:action="@{cargarLibro/cargar}" method="POST" enctype="multipart/form-data">
+                    <h2>Cargue el autor</h2>
+                    <br>
+                    <br>
+                    <form th:action="@{cargarAutor/cargar}" method="POST">
                         <p th:if="${error != null}" th:text="${error}" style="color: red"></p> 
-                    <label for="titulo">Titulo</label>
-                    <input class="bg-dark mb-3 opacity-75" type="text" name="titulo" th:value="${titulo}" required>
-                    <label for="autor">Autor</label>
-                    <select class="bg-dark mb-3 opacity-75" name="id_autor" required>
-                        <option value=""></option>
-                        <option  th:each="autor : ${autores}" th:value="${autor.id}" th:text="${autor.nombre}"></option>
-                    </select>
-                    <label for="editorial">Editorial</label>
-                    <select class="bg-dark mb-3 opacity-75" name="id_editorial" required>
-                        <option value=""></option>
-                        <option  th:each="editorial : ${editoriales}" th:value="${editorial.id}" th:text="${editorial.nombre}"></option>
-                    </select>
-                    <label for="foto">Portada</label>
-                    <input type="file" id="foto" name="foto">
-                    <label for="ejemplares">Cantidad de ejemplares</label>
-                    <input class="bg-dark mb-3 opacity-75" type="number" name="ejemplares" th:value="${ejemplares}" required>
-                    <label for="name">ISBN</label>
-                    <input class="bg-dark mb-3 opacity-75" type="text" name="isbn" th:value="${isbn}" required>
+                    <label for="nombre">Nombre</label>
+                    <input class="bg-dark mb-3 opacity-75" type="text" name="nombre" th:value="${nombre}" required>
+                    <br>
                     <button class="btn btn-outline-light" type="submit">Cargar</button>
+                    <br>
                     </form>
                 </div>
             </div>

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/autores")
@@ -57,20 +58,21 @@ public class AutorControlador {
     @GetMapping("/cargarAutor")
     public String cargarAutor(){
         
-        return "vistaU.html";
+        return "cargarAutor.html";
     }
     
     @PostMapping("cargarAutor/cargar")
-        public String cargar(ModelMap modelo, @RequestParam String nombre) throws ErrorServicio{
+        public String cargar(ModelMap modelo, @RequestParam String nombre, RedirectAttributes rda) throws ErrorServicio{
             try {
             autorservicio.cargarAutor(nombre);
         } catch (ErrorServicio e) {
             modelo.put("error", e.getMessage());
             modelo.put("nombre", nombre);
             Logger.getLogger(AutorControlador.class.getName()).log(Level.SEVERE,null, e);
-            return "vistaU.html";
-        }   
-        return "vistaU.html";
+            return "cargarAutor.html";
+        }
+        
+        return "redirect:/autores";
     }
     
 }

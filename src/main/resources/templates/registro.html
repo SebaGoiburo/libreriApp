@@ -20,21 +20,23 @@
             </ul>
         </div>
         <div class="centro">
-            <h1 id="registrate">Registrate</h1>
+            <div class="formularioCarga bg-dark mb-3 opacity-75">
+            <h2 id="registrate">Registrate</h2>
             <form action="/registrar" method="POST" enctype="multipart/form-data">
                 <label for="name">Nombre</label>
-                <input type="text" name="name">
+                <input class="bg-dark mb-3 opacity-75" type="text" name="name" required>
                 <label for="apellido">Apellido</label>
-                <input type="text" name="apellido">
-                <label for="foto">Cargá tu foto...</label><br>
-                <input type="file" name="foto"><br>
+                <input class="bg-dark mb-3 opacity-75" type="text" name="apellido" required>
+                <label for="foto">Cargá tu foto...</label>
+                <input class="bg-dark mb-3 opacity-75" type="file" name="foto">
                 <label for="correo">Correo electrónico</label>
-                <input type="text" name="correo">
+                <input class="bg-dark mb-3 opacity-75" type="text" name="correo" required>
                 <label for="clave">Contraseña</label>
-                <input type="password" name="clave">
+                <input class="bg-dark mb-3 opacity-75" type="password" name="clave" required>
                 <label for="confirmarClave">Confirmar contraseña</label>
-                <input type="password" name="confirmarClave">
+                <input class="bg-dark mb-3 opacity-75" type="password" name="confirmarClave" required>
             </form>
+            </div>
         </div>
         <footer>
             <p>Contacto: 0263-252896</p>

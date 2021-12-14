@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/libros")
@@ -46,9 +47,9 @@ public class LibroControlador {
     }
     
     @PostMapping("cargarLibro/cargar")
-        public String cargar(ModelMap modelo, @RequestParam String titulo,@RequestParam String id_autor,@RequestParam String id_editorial,@RequestParam Integer ejemplares, @RequestParam String isbn) throws ErrorServicio{
+        public String cargar(ModelMap modelo, @RequestParam String titulo,@RequestParam String id_autor,@RequestParam String id_editorial, MultipartFile foto, @RequestParam Integer ejemplares, @RequestParam String isbn) throws ErrorServicio{
             try {
-            libroservicio.cargarLibro(titulo, id_autor, id_editorial, ejemplares, isbn);
+            libroservicio.cargarLibro(titulo, id_autor, id_editorial, foto, ejemplares, isbn);
         } catch (ErrorServicio e) {
             modelo.put("error", e.getMessage());
             modelo.put("titulo", titulo);
@@ -56,12 +57,16 @@ public class LibroControlador {
             modelo.put("editorial", id_editorial);
             modelo.put("ejemplares", ejemplares);
             modelo.put("isbn", isbn);
+            List<Autor> autores = autorservicio.listarAutores();
+            List<Editorial> editoriales = editorialservicio.listarEditoriales();
+            modelo.addAttribute("autores", autores);
+            modelo.addAttribute("editoriales", editoriales);
             Logger.getLogger(PortalControlador.class.getName()).log(Level.SEVERE,null, e);
-            return "cargarLibro.html";
+            return "redirect:/cargarLibro.html";
         }
             String exito = "Carga de libro exitosa"; 
             modelo.put("exito", exito);
-        return "cargarLibro.html";
+        return "redirect:/libros.html";
     }
     
     
@@ -76,9 +81,9 @@ public class LibroControlador {
     }
     
     @PostMapping("/modificarLibro/modificar")
-        public String modificar(ModelMap modelo, @RequestParam String id, @RequestParam String titulo, @RequestParam String id_autor, @RequestParam String id_editorial, @RequestParam Integer ejemplares, @RequestParam String isbn) throws ErrorServicio{
+        public String modificar(ModelMap modelo, @RequestParam String id, @RequestParam String titulo, @RequestParam String id_autor, @RequestParam String id_editorial, MultipartFile foto, @RequestParam Integer ejemplares, @RequestParam String isbn) throws ErrorServicio{
             try {
-            libroservicio.modificarLibro(id, titulo, id_autor, id_editorial, ejemplares, isbn);
+            libroservicio.modificarLibro(id, titulo, id_autor, id_editorial, foto, ejemplares, isbn);
         } catch (ErrorServicio e) {
             modelo.put("error", e.getMessage());
             modelo.put("titulo", titulo);

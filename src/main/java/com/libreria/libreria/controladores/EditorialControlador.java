@@ -53,10 +53,10 @@ public class EditorialControlador {
         return "vistaU.html";
     }
     
-//    @GetMapping("/cargarEditorial")
-//    public String cargarEditorial(){
-//        return "vistaU.html";
-//    }
+    @GetMapping("/cargarEditorial")
+    public String cargarEditorial(){
+        return "cargarEditorial.html";
+    }
     
     @PostMapping("cargarEditorial/cargar")
         public String cargar(ModelMap modelo, @RequestParam String nombre) throws ErrorServicio{
@@ -68,7 +68,7 @@ public class EditorialControlador {
             Logger.getLogger(PortalControlador.class.getName()).log(Level.SEVERE,null, e);
             return "cargarEditorial.html";
         }   
-        return "vistaU.html";
+        return "redirect:/editoriales";
     }
     
         

@@ -34,7 +34,7 @@
             </div>
             <div class="right">
                         <div id="botonCargaLibro" th:if="${session.usuariosession.rol == 'ADMIN'}">
-                        <a class="btn btn-outline-light" th:href="@{/cargarEditorial}">Cargar editorial</a></td>
+                        <a class="btn btn-outline-light" th:href="@{editoriales/cargarEditorial}">Cargar editorial</a></td>
                         </div>
                         <br>
                         <br>
@@ -43,12 +43,15 @@
                                 <thead>
                                   <tr>
                                     <th scope="col">Nombre de la editorial</th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
                                   </tr>
                                 </thead>
                                 <tbody th:each="editorial : ${editoriales}">
                                   <tr>
                                     <td th:text="${editorial.nombre}"></td>
-                                    <td> <a class="btn btn-primary" href="/consultarLibros">Consultar libros</a></td>
+                                    <td> <a class="btn btn-outline-light" href="/consultarLibros">Consultar libros</a></td>
                                     <td th:if="${session.usuariosession.rol == 'ADMIN'}"> <a class="btn btn-outline-light" th:href="@{/__${editorial.id}__}">Editar</a></td>
                                     <td th:if="${session.usuariosession.rol == 'ADMIN'}"> <a class="btn btn-outline-light" th:href="@{/__${editorial.id}__}">Baja</a></td>
                                   </tr>

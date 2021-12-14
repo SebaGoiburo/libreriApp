@@ -71,6 +71,7 @@ body{
 }
 
 .centro{
+    width: 100%;
     min-height: 75vh;
     margin: auto;
     display: flex;
@@ -125,6 +126,7 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
 }
 
 .right::-webkit-scrollbar {
@@ -235,5 +237,62 @@ form{
 }
 
 .card{
-    text-align: center;
+    text-align: center; 
 }
+
+
+.formularioCarga{
+   width: 400px;
+   border-radius: 20px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+}
+
+.formularioCarga h2{
+    color: white;
+    text-align: center;
+    font-family: Roboto, sans-serif;
+    font-weight: 100px;
+    font-size: 40px;
+    opacity: 1;
+}
+
+.formularioCarga form{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+.formularioCarga form label{
+    color: white;
+    float: left;
+    font-family: Roboto, sans-serif;
+    font-size: 20px;
+    opacity: 1;
+}
+
+.formularioCarga form input{
+    color: white;
+    width: 266px;
+    height: 22px;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    border-bottom: solid white 2px;
+    
+}
+
+.formularioCarga form select{
+    color: white;
+    width: 266px;
+    height: 22px;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    border-bottom: solid white 2px;
+}
+
+
+    

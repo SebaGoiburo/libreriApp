@@ -13,6 +13,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class LibroServicio {
@@ -25,21 +26,26 @@ public class LibroServicio {
     private EditorialRepositorio editorialRepositorio;
     
     @Transactional
-    public void cargarLibro(String titulo, String id_autor, String id_editorial, Integer ejemplares, String isbn) throws ErrorServicio{
-        validarCarga(titulo, id_autor, id_editorial, ejemplares, isbn);
-        Libro libro = new Libro();
-        libro.setTitulo(titulo);
-        libro.setIsbn(isbn);
-        libro.setEjemplares(ejemplares);
-        libro.setEjemplaresRestantes(ejemplares);
-        libro.setEjemplaresPrestados(0);
-        libro.setAutor(autorRepositorio.getById(id_autor));
-        libro.setEditorial(editorialRepositorio.getById(id_editorial));
-        libroRepositorio.save(libro);
+    public void cargarLibro(String titulo, String id_autor, String id_editorial, MultipartFile foto, Integer ejemplares, String isbn) throws ErrorServicio{
+        try {
+            validarCarga(titulo, id_autor, id_editorial, ejemplares, isbn);
+            Libro libro = new Libro();
+            libro.setTitulo(titulo);
+            libro.setIsbn(isbn);
+            libro.setEjemplares(ejemplares);
+            libro.setEjemplaresRestantes(ejemplares);
+            libro.setEjemplaresPrestados(0);
+            libro.setFoto(foto);
+            libro.setAutor(autorRepositorio.getById(id_autor));
+            libro.setEditorial(editorialRepositorio.getById(id_editorial));
+            libroRepositorio.save(libro);
+        } catch (ErrorServicio e) {
+            throw new ErrorServicio("Ha ocurrido un error durate la carga");
+        }
     }
     
     @Transactional
-    public void modificarLibro(String id, String titulo, String id_autor, String id_editorial, Integer ejemplares, String isnb) throws ErrorServicio{
+    public void modificarLibro(String id, String titulo, String id_autor, String id_editorial, MultipartFile foto, Integer ejemplares, String isnb) throws ErrorServicio{
         Optional<Libro> respuesta = libroRepositorio.findById(id);
         if (respuesta.isPresent()){
             Libro l = respuesta.get();
@@ -49,6 +55,7 @@ public class LibroServicio {
             l.setAutor(a);
             Editorial e = editorialRepositorio.getById(id_editorial);
             l.setEditorial(e);
+            l.setFoto(foto);
             l.setIsbn(isnb);
             libroRepositorio.save(l);
         } else{
